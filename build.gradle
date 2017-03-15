@@ -1,0 +1,23 @@
+
+// Apply the java-library plugin to add support for Java Library
+apply plugin: 'java-library'
+apply plugin: 'maven'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+    implementation 'mysql:mysql-connector-java:6.0.6'
+}
+
+
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "file://${buildDir}/mvn-repo")
+        snapshotRepository(url: "file://${buildDir}/mvn-repo-snapshots")
+    }
+}
+
